@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Find the Digits</string>
+    <string name="placeholder">PLACEHOLDER</string>
 </resources>

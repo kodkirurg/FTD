@@ -55,12 +55,12 @@ public class MainActivity extends AppCompatActivity  {
             allHints.add(hint);
 
             //One Number is correct but wrong placed
-            Hint hint1 = new Hint("One Number is correct but wrong placed",
+            Hint hint1 = new Hint("One Number is correct, but in the wrong place",
                     new int[]{incorrect.get(0),incorrect.get(2),correct.get(1)} );
             allHints.add(hint1);
 
             //Two Numbers are correct but Wrong Places
-            Hint hint2 = new Hint("Two Numbers are correct but Wrong Places",
+            Hint hint2 = new Hint("Two Numbers are correct, but in the wrong Places",
                     new int[]{correct.get(2),correct.get(0),incorrect.get(0)});
             allHints.add(hint2);
 
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity  {
                     new int[]{incorrect.get(1),incorrect.get(4),incorrect.get(3)});
             allHints.add(hint3);
 
-            Hint hint4 = new Hint("One Number is correct but wrong place",
+            Hint hint4 = new Hint("One Number is correct, but in the wrong place",
                     new int[]{incorrect.get(1),incorrect.get(3),correct.get(0)});
             allHints.add(hint4);
 
