@@ -10,8 +10,10 @@ import java.util.List;
 
 public class HintsAdapter extends RecyclerView.Adapter<HintsAdapter.ViewHolder> {
 
-    HintsAdapter(List<Hint> allHints){
+    private List<Hint> allHints;
 
+    HintsAdapter(List<Hint> allHints){
+        this.allHints=allHints;
     }
 
 
