@@ -1,18 +1,163 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<LinearLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:padding="20dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <TextView
+        android:id="@+id/textView"
+        android:text="TEST"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_gravity="center"
+        android:textColor="#000"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher"
+        android:layout_gravity="center"
+        android:id="@+id/lockImage" />
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="One Number is correct and well placed" />
+
+    <TextView
+        android:id="@+id/hint1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="One Number is correct, but wrong placed"
+        />
+
+    <TextView
+        android:id="@+id/hint2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Two Numbers are correct, but wrong places" />
+
+    <TextView
+        android:id="@+id/hint3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nothing is correct" />
+
+    <TextView
+        android:id="@+id/hint4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="One Number is correct, but wrong placed" />
+
+    <TextView
+        android:id="@+id/hint5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/input1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/input2"
+            android:layout_toLeftOf="@+id/input2"
+            android:drawableBottom="@color/colorPrimaryDark"
+            android:inputType="number"
+            android:layout_marginRight="15dp"
+            android:maxLength="1"
+            android:focusable="true"
+            android:nextFocusDown="@+id/input2"
+            android:nextFocusUp="@+id/input1"
+            android:selectAllOnFocus="true"
+            android:imeOptions="actionNext"
+            />
+
+        <EditText
+            android:id="@+id/input2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:drawableBottom="@color/colorPrimaryDark"
+            android:inputType="number"
+            android:maxLength="1"
+            android:nextFocusDown="@+id/input3"
+            android:nextFocusUp="@+id/input1"
+            android:selectAllOnFocus="true"
+            android:imeOptions="actionNext"
+            />
+
+        <EditText
+            android:id="@+id/input3"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/input2"
+            android:drawableBottom="@color/colorPrimaryDark"
+            android:inputType="number"
+            android:nextFocusDown="@+id/button"
+            android:nextFocusUp="@+id/input2"
+            android:maxLength="1"
+            android:focusable="true"
+            android:selectAllOnFocus="true"
+            />
+
+        <Button
+            android:id="@+id/button"
+            android:focusable="true"
+            android:layout_width="328dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/input2"
+            android:layout_gravity="center_vertical"
+            android:onClick="onClick"
+            android:text="asdasd" />
+    </RelativeLayout>
+
+</LinearLayout>
+
