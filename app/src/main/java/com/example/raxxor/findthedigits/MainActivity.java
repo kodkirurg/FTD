@@ -1,16 +1,19 @@
 package com.example.raxxor.findthedigits;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
 import android.widget.NumberPicker;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     HintsAdapter adapter;
     LinearLayoutManager linearLayoutManager;
@@ -26,7 +29,7 @@ public class MainActivity extends AppCompatActivity  {
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        adapter = new HintsAdapter(generateHints.generateNew());
+        adapter = new HintsAdapter(GenerateHints.generateNew());
         recyclerView.setAdapter(adapter);
         init();
     }
@@ -34,23 +37,96 @@ public class MainActivity extends AppCompatActivity  {
 
 
     public void init(){
+
+
         //Number picker
         NumberPicker np = findViewById(R.id.main_numberPicker_left);
+        NumberPickerListener listener = new NumberPickerListener();
+        NumberPickerListener listener1 = new NumberPickerListener();
+        NumberPickerListener listener2 = new NumberPickerListener();
         np.setMaxValue(9);
         np.setMinValue(0);
         np.setValue(0);
+        np.setOnScrollListener(listener);
+        np.setOnValueChangedListener(listener);
         np = findViewById(R.id.main_numberPicker_middle);
         np.setMaxValue(9);
         np.setMinValue(0);
         np.setValue(0);
+        np.setOnScrollListener(listener1);
+        np.setOnValueChangedListener(listener1);
         np = findViewById(R.id.main_numberPicker_right);
         np.setMaxValue(9);
         np.setMinValue(0);
         np.setValue(0);
+        np.setOnScrollListener(listener2);
+        np.setOnValueChangedListener(listener2);
     }
 
 
-    private static class generateHints {
+    private class NumberPickerListener implements NumberPicker.OnScrollListener, NumberPicker.OnValueChangeListener{
+        private int scrollState=SCROLL_STATE_IDLE;
+        private NumberPicker view;
+
+
+        @Override
+        public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+            this.view=picker;
+            if(scrollState==SCROLL_STATE_IDLE){
+                update();
+            }
+        }
+
+
+        @Override
+        public void onScrollStateChange(NumberPicker view, int scrollState) {
+            this.scrollState=scrollState;
+            this.view=view;
+
+            if(scrollState==SCROLL_STATE_IDLE ){
+                update();
+            }
+        }
+
+        void update(){
+            switch (view.getId()){
+                case R.id.main_numberPicker_left:
+                    if(view.getValue()==GenerateHints.correct.get(0)){
+                        view.setBackgroundColor(Color.GREEN);
+                    }
+                    else{
+                        view.setBackgroundColor(Color.RED);
+                    }
+                    break;
+                case R.id.main_numberPicker_middle:
+                    if(view.getValue()==GenerateHints.correct.get(1)){
+                        view.setBackgroundColor(Color.GREEN);
+                    }
+                    else{
+                        view.setBackgroundColor(Color.RED);
+                    }
+                    break;
+                case R.id.main_numberPicker_right:
+                    if(view.getValue()==GenerateHints.correct.get(2)){
+                        view.setBackgroundColor(Color.GREEN);
+                    }
+                    else{
+                        view.setBackgroundColor(Color.RED);
+                    }
+                    break;
+
+
+            }
+
+        }
+    }
+
+
+
+    private static class GenerateHints {
+
+        static ArrayList<Integer> correct;
+
 
         static ArrayList<Hint> generateNew(){ //generate new numbers
             ArrayList<Hint> allHints = new ArrayList<>();
@@ -60,7 +136,7 @@ public class MainActivity extends AppCompatActivity  {
             }
             // shuffle
             Collections.shuffle(allNumbers);
-            ArrayList<Integer> correct = new ArrayList<>(allNumbers.subList(0,3));
+            correct = new ArrayList<>(allNumbers.subList(0,3));
             ArrayList<Integer> incorrect = new ArrayList<>(allNumbers.subList(3,10));
 
 
