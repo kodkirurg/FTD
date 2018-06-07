@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.NumberPicker;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,8 +28,25 @@ public class MainActivity extends AppCompatActivity  {
 
         adapter = new HintsAdapter(generateHints.generateNew());
         recyclerView.setAdapter(adapter);
+        init();
+    }
 
 
+
+    public void init(){
+        //Number picker
+        NumberPicker np = findViewById(R.id.main_numberPicker_left);
+        np.setMaxValue(9);
+        np.setMinValue(0);
+        np.setValue(0);
+        np = findViewById(R.id.main_numberPicker_middle);
+        np.setMaxValue(9);
+        np.setMinValue(0);
+        np.setValue(0);
+        np = findViewById(R.id.main_numberPicker_right);
+        np.setMaxValue(9);
+        np.setMinValue(0);
+        np.setValue(0);
     }
 
 

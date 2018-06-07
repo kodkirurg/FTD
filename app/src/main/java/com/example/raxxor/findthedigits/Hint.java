@@ -8,10 +8,4 @@ public class Hint {
         this.hintDescription=hintDescription;
         this.hintIntegers=hintIntegers;
     }
-    public int[] getHintIntegers() {
-        return hintIntegers;
-    }
-    public String getHintDescription() {
-        return hintDescription;
-    }
 }
