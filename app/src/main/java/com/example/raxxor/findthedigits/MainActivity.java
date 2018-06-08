@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        adapter = new HintsAdapter(GenerateHints.generateNew());
+        adapter = new HintsAdapter(GenerateHints.generateNew(),this);
         recyclerView.setAdapter(adapter);
         init();
     }

@@ -1,23 +1,25 @@
 package com.example.raxxor.findthedigits;
 
+import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HintsAdapter extends RecyclerView.Adapter<HintsAdapter.ViewHolder> {
 
     private List<Hint> allHints;
+    private Activity activity;
 
-    HintsAdapter(List<Hint> allHints){
+    HintsAdapter(List<Hint> allHints,Activity activity){
         this.allHints=allHints;
+        this.activity=activity;
     }
 
 
@@ -30,6 +32,14 @@ public class HintsAdapter extends RecyclerView.Adapter<HintsAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        //set height
+        int recyclerViewHeight = activity.findViewById(R.id.main_hints_recyclerView).getMeasuredHeight();
+        ConstraintLayout cl =  holder.layout;
+        ViewGroup.LayoutParams lp =  cl.getLayoutParams();
+        lp.height = recyclerViewHeight / allHints.size();
+        cl.setLayoutParams(lp);
+
+        //set text
         Hint hint = allHints.get(position);
         ((TextView)holder.layout.findViewById(R.id.hint_textView_left) ).setText(String.valueOf(hint.hintIntegers[0]));
         ((TextView)holder.layout.findViewById(R.id.hint_textView_middle) ).setText(String.valueOf(hint.hintIntegers[1]));
