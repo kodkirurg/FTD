@@ -6,9 +6,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.support.annotation.ColorRes;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.NumberPicker;
 
 import java.util.ArrayList;
@@ -35,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
         adapter = new HintsAdapter(GenerateHints.generateNew(),this);
         recyclerView.setAdapter(adapter);
         init();
-        won();
     }
 
 
@@ -129,13 +131,31 @@ public class MainActivity extends AppCompatActivity {
     void won(){
 
 
-
         //vibrate
         if (Build.VERSION.SDK_INT >= 26) {
             ((Vibrator) Objects.requireNonNull(getSystemService(VIBRATOR_SERVICE))).vibrate(VibrationEffect.createOneShot(vibrationTimeInMs,VibrationEffect.DEFAULT_AMPLITUDE));
         } else {
             ((Vibrator) Objects.requireNonNull(getSystemService(VIBRATOR_SERVICE))).vibrate(vibrationTimeInMs);
         }
+
+
+        //disco
+        for(int x=0;x<linearLayoutManager.getItemCount();x++){
+            final int finalX = x;
+            linearLayoutManager.findViewByPosition(x).postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    linearLayoutManager.findViewByPosition(finalX).setBackgroundColor(Color.GREEN);
+                }
+            },x*500);
+            linearLayoutManager.findViewByPosition(x).postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    linearLayoutManager.findViewByPosition(finalX).setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark));
+                }
+            },linearLayoutManager.getItemCount() * 500 + x*500);
+        }
+
 
         //generate new hints
         adapter.newHints(GenerateHints.generateNew());
