@@ -134,8 +134,6 @@ public class MainActivity extends AppCompatActivity {
         //vibrate
         if (Build.VERSION.SDK_INT >= 26) {
             ((Vibrator) Objects.requireNonNull(getSystemService(VIBRATOR_SERVICE))).vibrate(VibrationEffect.createOneShot(vibrationTimeInMs,VibrationEffect.DEFAULT_AMPLITUDE));
-        } else {
-            ((Vibrator) Objects.requireNonNull(getSystemService(VIBRATOR_SERVICE))).vibrate(vibrationTimeInMs);
         }
 
 
