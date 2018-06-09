@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="75dp"
     android:padding="10dp"
+    android:background="@color/colorPrimaryDark"
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
     >
@@ -12,7 +13,7 @@
         android:layout_height="0dp"
         android:orientation="horizontal"
         android:id="@+id/hint_separator"
-        app:layout_constraintGuide_percent="0.35"
+        app:layout_constraintGuide_percent="0.4"
 
         />
 
