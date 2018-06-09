@@ -30,6 +30,11 @@ public class HintsAdapter extends RecyclerView.Adapter<HintsAdapter.ViewHolder> 
         return new HintsAdapter.ViewHolder(view);
     }
 
+    public void newHints(List<Hint> allHints){
+        this.allHints=allHints;
+        notifyDataSetChanged();
+    }
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //set height

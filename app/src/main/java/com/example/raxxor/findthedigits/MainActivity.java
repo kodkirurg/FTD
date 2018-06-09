@@ -2,21 +2,24 @@ package com.example.raxxor.findthedigits;
 
 
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.View;
 import android.widget.NumberPicker;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     HintsAdapter adapter;
     LinearLayoutManager linearLayoutManager;
+    final static int vibrationTimeInMs = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +35,12 @@ public class MainActivity extends AppCompatActivity {
         adapter = new HintsAdapter(GenerateHints.generateNew(),this);
         recyclerView.setAdapter(adapter);
         init();
+        won();
     }
 
 
 
     public void init(){
-
-
         //Number picker
         NumberPicker np = findViewById(R.id.main_numberPicker_left);
         NumberPickerListener listener = new NumberPickerListener();
@@ -82,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
         public void onScrollStateChange(NumberPicker view, int scrollState) {
             this.scrollState=scrollState;
             this.view=view;
-
             if(scrollState==SCROLL_STATE_IDLE ){
                 update();
             }
@@ -114,19 +115,49 @@ public class MainActivity extends AppCompatActivity {
                         view.setBackgroundColor(Color.RED);
                     }
                     break;
-
-
             }
-
+            if( //win
+                    ((NumberPicker)findViewById(R.id.main_numberPicker_left)).getValue()==GenerateHints.correct.get(0) &&
+                    ((NumberPicker)findViewById(R.id.main_numberPicker_middle)).getValue()==GenerateHints.correct.get(1) &&
+                    ((NumberPicker)findViewById(R.id.main_numberPicker_right)).getValue()==GenerateHints.correct.get(2)){
+                //generate new hints
+                won();
+            }
         }
+    }
+
+    void won(){
+
+
+
+        //vibrate
+        if (Build.VERSION.SDK_INT >= 26) {
+            ((Vibrator) Objects.requireNonNull(getSystemService(VIBRATOR_SERVICE))).vibrate(VibrationEffect.createOneShot(vibrationTimeInMs,VibrationEffect.DEFAULT_AMPLITUDE));
+        } else {
+            ((Vibrator) Objects.requireNonNull(getSystemService(VIBRATOR_SERVICE))).vibrate(vibrationTimeInMs);
+        }
+
+        //generate new hints
+        adapter.newHints(GenerateHints.generateNew());
+
+        //restore numberPickers
+        NumberPicker np1 = findViewById(R.id.main_numberPicker_left);
+        np1.setValue(0);
+        np1.setBackgroundColor(Color.WHITE);
+        NumberPicker np2 = findViewById(R.id.main_numberPicker_middle);
+        np2.setValue(0);
+        np2.setBackgroundColor(Color.WHITE);
+        NumberPicker np3 = findViewById(R.id.main_numberPicker_right);
+        np3.setValue(0);
+        np3.setBackgroundColor(Color.WHITE);
     }
 
 
 
     private static class GenerateHints {
 
+        //static so make sure if generate new, also show the new ones.
         static ArrayList<Integer> correct;
-
 
         static ArrayList<Hint> generateNew(){ //generate new numbers
             ArrayList<Hint> allHints = new ArrayList<>();
