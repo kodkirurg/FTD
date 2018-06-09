@@ -1,4 +1,4 @@
-package com.example.raxxor.findthedigits;
+package com.raxxor.findthedigits;
 
 
 import android.graphics.Color;
@@ -6,12 +6,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.support.annotation.ColorRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.NumberPicker;
 
 import java.util.ArrayList;

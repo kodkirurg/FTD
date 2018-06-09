@@ -1,4 +1,4 @@
-package com.example.raxxor.findthedigits;
+package com.raxxor.findthedigits;
 
 public class Hint {
     String hintDescription;
